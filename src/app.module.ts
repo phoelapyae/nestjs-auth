@@ -3,9 +3,27 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { CoffeesModule } from './coffees/coffees.module';
 import { UsersModule } from './users/users.module';
+import { TypeOrmModule } from '@nestjs/typeorm';
+import { IamModule } from './iam/iam.module';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [CoffeesModule, UsersModule],
+  imports: [
+    ConfigModule.forRoot(),
+    TypeOrmModule.forRoot({
+      type: 'postgres',
+      host: process.env.DATABASE_HOST,
+      port: parseInt(process.env.DATABASE_PORT || '5432', 10),
+      username: process.env.DATABASE_USER,
+      password: process.env.DATABASE_PASSWORD,
+      database: process.env.DATABASE_NAME,
+      autoLoadEntities: true,
+      synchronize: true
+    }),
+    IamModule,
+    CoffeesModule,
+    UsersModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
