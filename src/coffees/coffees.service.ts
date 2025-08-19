@@ -5,11 +5,11 @@ import { UpdateCoffeeDto } from './dto/update-coffee.dto';
 @Injectable()
 export class CoffeesService {
   create(createCoffeeDto: CreateCoffeeDto) {
-    return 'This action adds a new coffee';
+    return 'This action adds a new coffee UPdate';
   }
 
   findAll() {
-    return `This action returns all coffees`;
+    return `This action returns all coffees Update!!1`;
   }
 
   findOne(id: number) {
