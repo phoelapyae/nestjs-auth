@@ -20,8 +20,7 @@ export class FrameworkContributorPolicyHandler implements PolicyHandler<Framewor
         policy: FrameworkContributorPolicy,
         user: ActiveUserData
     ): Promise<void> {
-        console.log("User Email ", user.email);
-        const isContributor = user.email.endsWith('@nest.com');
+        const isContributor = user.email.endsWith('@gmail.com');
 
         if (!isContributor) {
             throw new Error('User is not a contributor.');

@@ -1,8 +1,5 @@
 import { CanActivate, ExecutionContext, ForbiddenException, Injectable, Type } from '@nestjs/common';
 import { Reflector } from '@nestjs/core';
-import { Observable } from 'rxjs';
-import { ROLES_KEY } from '../../decorators/roles.decorator';
-import { Role } from 'src/users/enums/role.enum';
 import { ActiveUserData } from 'src/iam/interfaces/active-user-data.interface';
 import { REQUEST_USER_KEY } from 'src/iam/iam.constants';
 import { Policy } from '../../policies/interfaces/policy.interface';
