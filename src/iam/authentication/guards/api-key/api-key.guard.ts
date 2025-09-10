@@ -16,11 +16,18 @@ export class ApiKeyGuard implements CanActivate {
   ){}
   async canActivate(context: ExecutionContext): Promise<boolean> {
     const request = context.switchToHttp().getRequest();
+
     const apiKey = this.extractKeyFromHeader(request);
+
     if (!apiKey) {
       throw new UnauthorizedException();
     }
+
+    console.log("APIKEY", apiKey);
+
     const apiKeyEntityId = this.apiKeysService.extractIdFromApiKey(apiKey);
+
+    console.log("Extracted ID ", apiKeyEntityId);
 
     try {
       const apiKeyEntity = await this.apiKeysRepository.findOne({
@@ -30,12 +37,14 @@ export class ApiKeyGuard implements CanActivate {
 
       if (apiKeyEntity) {
         await this.apiKeysService.validate(apiKey, apiKeyEntity.key);
+        
         request[REQUEST_USER_KEY] = {
           sub: apiKeyEntity.user.id,
           email: apiKeyEntity.user.email,
           role: apiKeyEntity.user.role,
           permissions: apiKeyEntity.user.permissions,
         } as ActiveUserData;
+
       }
     } catch (error) {
       throw new UnauthorizedException();

@@ -18,7 +18,7 @@ export class AuthenticationGuard implements CanActivate {
     private readonly reflector: Reflector,
     private readonly accessTokenGuard: AccessTokenGuard,
     private readonly apiKeyGuard: ApiKeyGuard
-  ) { 
+  ) {
     this.authTypeGuardMap = {
       [AuthType.Bearer]: this.accessTokenGuard,
       [AuthType.ApiKey]: this.apiKeyGuard,
