@@ -23,11 +23,7 @@ export class ApiKeyGuard implements CanActivate {
       throw new UnauthorizedException();
     }
 
-    console.log("APIKEY", apiKey);
-
     const apiKeyEntityId = this.apiKeysService.extractIdFromApiKey(apiKey);
-
-    console.log("Extracted ID ", apiKeyEntityId);
 
     try {
       const apiKeyEntity = await this.apiKeysRepository.findOne({
